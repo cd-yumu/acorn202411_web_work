@@ -124,13 +124,18 @@ public class PostController {
 	 *  검색 키워드도 파라미터로 넘어오면 PostDto 의 condition 과 keyword 가 null 이 아니다 
 	 *  검색 키워드가 넘어오지않으면 PostDto 의 condition 과 keyword 는 null 이다 
 	 */
-	@GetMapping("/post/list")
-	public String list(@RequestParam(defaultValue = "1") int pageNum, PostDto search, Model model) {
+	@GetMapping("/posts")
+	public PostListDto list(@RequestParam(defaultValue = "1") int pageNum, PostDto search) {
+		//글 목록과 검색 키워드 관련 정보가 들어 있는 PostListDto
 		PostListDto dto=service.getPosts(pageNum, search);
-		model.addAttribute("dto", dto);
-		return "post/list";
+		//JSON 문자열이 응답 되도록 dto 를 리턴한다. 
+		return dto;
 	}
 }
+
+
+
+
 
 
 
